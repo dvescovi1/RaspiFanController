@@ -1,0 +1,89 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/RaspiFanController.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "publish",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/RaspiFanController.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "${workspaceFolder}/RaspiFanController.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "fastiot-7f5d8435-build-linux",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/RaspiFanController.csproj",
+        "--configuration",
+        "Debug",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary",
+        "-r",
+        "linux-arm64"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "fastiot-7f5d8435-create-folder",
+      "dependsOn": "fastiot-7f5d8435-build-linux",
+      "command": "C:\\RemoteCode\\cwrsync\\ssh.exe",
+      "type": "process",
+      "args": [
+        "-i",
+        "C:\\RemoteCode\\keys\\id-rsa-david-desktop-037d9c0c-debugvscode",
+        "-o",
+        "StrictHostKeyChecking no",
+        "debugvscode@192.168.1.117",
+        "mkdir -p ~/fastiot/RaspiFanController"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "fastiot-7f5d8435-copy-app-to-device",
+      "dependsOn": "fastiot-7f5d8435-create-folder",
+      "command": "C:\\RemoteCode\\cwrsync\\rsync.exe",
+      "type": "process",
+      "args": [
+        "--log-file=rsync.log",
+        "--progress",
+        "-avz",
+        "-e",
+        "C:\\RemoteCode\\cwrsync\\ssh.exe -i C:\\RemoteCode\\keys\\id-rsa-david-desktop-037d9c0c-debugvscode -o 'StrictHostKeyChecking no'",
+        "/cygdrive/c/Users/dvesc/source/repos/RPItests/RaspiFanController/RaspiFanController/bin/Debug/net6.0/linux-arm64/",
+        "debugvscode@192.168.1.117:~/fastiot/RaspiFanController"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}

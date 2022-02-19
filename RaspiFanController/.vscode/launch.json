@@ -1,0 +1,52 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/bin/Debug/net6.0/RaspiFanController.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "stopAtEntry": false
+    },
+    {
+      "name": ".NET Core Attach",
+      "type": "coreclr",
+      "request": "attach"
+    },
+    {
+      "fastiotId": "7f5d8435",
+      "fastiotIdDevice": "david-desktop-037d9c0c",
+      "fastiotProject": "RaspiFanController.csproj",
+      "name": ".NET Remote Launch on david-desktop (Embedded device, debugvscode)",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "dotnet",
+      "args": [
+        "./RaspiFanController.dll"
+      ],
+      "cwd": "~/fastiot/RaspiFanController",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "env": {
+        "FASTIOT": "easy"
+      },
+      "pipeTransport": {
+        "pipeCwd": "${workspaceFolder}",
+        "pipeProgram": "C:\\RemoteCode\\cwrsync\\ssh.exe",
+        "pipeArgs": [
+          "-i",
+          "C:\\RemoteCode\\keys\\id-rsa-david-desktop-037d9c0c-debugvscode",
+          "-o",
+          "StrictHostKeyChecking no",
+          "debugvscode@192.168.1.117"
+        ],
+        "debuggerPath": "/usr/share/vsdbg/vsdbg --engineLogging=/var/log/vsdbg.log"
+      },
+      "preLaunchTask": "fastiot-7f5d8435-copy-app-to-device"
+    }
+  ]
+}
