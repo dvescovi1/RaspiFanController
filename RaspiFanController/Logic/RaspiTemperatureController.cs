@@ -79,7 +79,7 @@ namespace RaspiFanController.Logic
                 if (IsFanRunning)
                 {
                     FanController.TurnFanOff();
-                    Logger.LogDebug("Set manual mode and turned on");
+                    Logger.LogDebug("Set manual mode and turned off");
                 }
             }
         }
